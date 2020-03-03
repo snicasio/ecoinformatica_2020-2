@@ -1,2 +1,2 @@
-# ecoinformatica_2020-2
-Repositorio donde los estudiantes subirán los códigos de sus ejercicios y evaluaciones. Este repositorio es de trabajos en R
+# ecoinformatica_2020-2: Primer parcial
+Rama del repositorio mamdre donde subirán los paquetes de R que corresponden a su primer evaluación.
