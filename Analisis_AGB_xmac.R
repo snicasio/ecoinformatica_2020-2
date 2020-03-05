@@ -53,6 +53,7 @@ cor_tab
 
         ##  TERCER PASO: ELABORAR TODAS LAS COMBINACIONES POSIBLES DE MODELOS
 
+#modelo
 modelo <- lm(bio~evi, data = ind_tab)
 
 modelo
