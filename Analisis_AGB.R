@@ -13,7 +13,7 @@ raster_list <- lapply(raster_names,raster)  #   Cargamos los archivos raster en 
 
 ind_list <- lapply(raster_list,function(x) unlist(extract(x,sample_plots))) #   Extraemos el valor del pixel que hay dentro de cada plot
 ind_tab <- data.frame(do.call(cbind,ind_list))    #   Convertimos la lista a un data.frame
-
+rownames(ind_tab) <- seq(rownames(ind_tab))
 
 
         ##  SEGUNDO PASO: HACER LAS TRANSFORMACIONES NECESARIAS EN CADA COLUMNA PARA QUE SE CUMPLA CON LA DISTRIBUCION NORMAL
@@ -23,6 +23,8 @@ library("moments")
 norm_tab <- data.frame(normal = sapply(ind_tab,function(x) shapiro.test(x)$p.value),
                        sesgo = sapply(ind_tab,skewness))
 norm_tab$normal <- ifelse(norm_tab$normal <= 0.05, "NO", "SI")
+norm_tab
+
 
 
 
