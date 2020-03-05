@@ -1,6 +1,7 @@
 library("raster")
 library("rgeos")
 library("rgdal")
+library("moments")
 
 
 raster_names <- list.files()[grep(".tif",list.files())] #   Elaboramos un vector con los nombres de los archivos raster (terminacion *.tif)
@@ -13,7 +14,7 @@ raster_list <- lapply(raster_names,raster)  #   Cargamos los archivos raster en 
 
 ind_list <- lapply(raster_list,function(x) unlist(extract(x,sample_plots))) #   Extraemos el valor del pixel que hay dentro de cada plot
 ind_tab <- data.frame(do.call(cbind,ind_list))    #   Convertimos la lista a un data.frame
-
+rownames(ind_tab) <- seq(rownames(ind_tab))
 
 
         ##  SEGUNDO PASO: HACER LAS TRANSFORMACIONES NECESARIAS EN CADA COLUMNA PARA QUE SE CUMPLA CON LA DISTRIBUCION NORMAL
