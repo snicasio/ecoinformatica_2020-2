@@ -51,11 +51,14 @@ cor_tab
 
         ##  CUARTO PASO: ELABORAR TODAS LAS COMBINACIONES POSIBLES DE MODELOS
 
-modelo <- lm(bio~evi,data = ind_tab)
+modelo <- lm(bio~arvi,data = ind_tab)
 
 modelo
 summary(modelo)
 anova(modelo)
+
+logLik(modelo)
+
 
 plot(bio~evi,data = ind_tab)
 abline(modelo, lwd = 2, col = "red")
