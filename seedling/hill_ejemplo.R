@@ -5,10 +5,8 @@ sd <- lapply(list.files()[grep(".csv",list.files())], read.csv)
         sd[[i]] <- sd[[i]][!rowSums(sd[[i]])==0,]
     }
 
-
-
 todo <- do.call(rbind,lapply(sd,colSums))
 
+ab_rel <- lapply(sd, function(x) x/rowSums(x))  #   Abundancias relativas
 
-sd[[1]]/rowSums(sd[[1]])
-sd[[2]]/rowSums(sd[[2]])
+(sum(ab_rel[[1]][,"Trophis.racemosa"]^2)+sum(ab_rel[[2]][,"Trophis.racemosa"]^2)+sum(ab_rel[[3]][,"Trophis.racemosa"]^2))/3
