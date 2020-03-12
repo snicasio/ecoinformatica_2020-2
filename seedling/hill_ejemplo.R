@@ -1,14 +1,24 @@
+library(vegan)
+data("BCI")
 
-sd <- lapply(list.files()[grep(".csv",list.files())], read.csv)
-    for(i in seq(sd)){
-        sd[[i]] <- sd[[i]][,-1]
-        sd[[i]] <- sd[[i]][!rowSums(sd[[i]])==0,]
-    }
+    #   PARA OBTENER LA DIVERSIDAD ALFA CUANDO q=0
+
+bci_rel <- as.matrix(BCI/rowSums(BCI))
+
+a0 <- ifelse(bci_rel == 0, 0, bci_rel^0) # Los valores que originalmente son cero, se mantienen como cero. De otra forma, se elevan a cero
+
+alfa_0 <- sum(colMeans(a0))^(1/(1-0)) #  Formula
+    alfa_0 #    Listo
 
 
+    #   PARA OBTENER LA DIVERSIDAD ALFA CUANDO q=1
 
-todo <- do.call(rbind,lapply(sd,colSums))
+bci_rel <- as.matrix(BCI/rowSums(BCI))
 
+a1 <- as.matrix(bci_rel*log(bci_rel)) # Elaboro un objeto donde se calcule el producto de las abundancias relativas por su logaritmo natural (NOTA: apareceran NaN's)
+    a1[is.nan(a1)==T] <- 0 #    Este codigo es para cambiar los NaN por ceros (empleo una sola dimension porque es una matriz)
 
-sd[[1]]/rowSums(sd[[1]])
-sd[[2]]/rowSums(sd[[2]])
+alfa_1 <- exp(-mean(rowSums(ej))) # Formula
+    alfa_1 #    Listo
+
+    #   ESTOS SON LOS VALORES PROMEDIO DE ALFA PARA UNA SOLA MATRIZ. ESE VALOR ES EL QUE DIVIDE A GAMMA PARA OBTENER LA BETA
