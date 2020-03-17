@@ -38,7 +38,7 @@ hill_sna <- function(x){
 }
 
 
-word_fun <- function(x){
+word_fun_sna <- function(x){
     if(is.character(x)==T){
         word_pos <- match(unlist(strsplit(x,"")), letters)
     }else{
@@ -48,7 +48,7 @@ word_fun <- function(x){
 }
 
 
-anagram <- function(x,y){
+anagram_sna <- function(x,y){
     if(is.character(x)==T & is.character(y)==T){
         x_split <- unlist(strsplit(x,""))
         y_split <- unlist(strsplit(y,""))
@@ -64,7 +64,7 @@ anagram <- function(x,y){
 }
 
 
-est <- function(x){
+est_sna <- function(x){
     if(is.integer(x)==T | is.double(x)==T){
         y <- 0
         for(i in seq(x)-1){
@@ -80,7 +80,7 @@ est <- function(x){
 }
 
 
-sum_acc <- function(x){
+sum_acc_sna <- function(x){
     if(is.integer(x)==T | is.double(x)==T){
         y <- x[1]
         for(i in 2:length(x)){
@@ -93,7 +93,7 @@ sum_acc <- function(x){
 }
 
 
-fct <- function(x){
+fct_sna <- function(x){
     if(length(x)==1){
         x<-as.integer(x)
         y <- 1
@@ -107,7 +107,7 @@ fct <- function(x){
 }
 
 
-skr <- function(x){
+skr_sna <- function(x){
     if(is.integer(x)==T | is.double(x)==T){
         y <- 0
         for(i in seq(x)-1){
