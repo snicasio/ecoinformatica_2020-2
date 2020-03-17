@@ -1,0 +1,10 @@
+Package: CRRL
+Type: Package
+Title: Para calcular números de Hill y sumas acumuladas.
+Version: 0.1.0
+Author: Claudio Rodrigo Rico León
+Maintainer: The package maintainer <alfacrrl@gmail.com>
+Description: La función de "Hill"" ayuda a calcular números de Hill para obtener índices de diversidad verdadera.    La función de "Sumac" ayuda a calcular sumas acumuladas de vectores.
+License: Alfa gamma beta kakaroteno
+Encoding: UTF-8
+LazyData: true
