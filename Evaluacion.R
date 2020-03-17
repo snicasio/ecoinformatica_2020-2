@@ -9,11 +9,13 @@ data("BCI")
 source("primer_parcial.R")
 library(ARZ)
 library(vrm)
+library(KJLM)
 
 
         ##  Numeris de Hill
 
 ARZ::divHill(BCI)
+KJLM::Diversidad_Hill(as.matrix(BCI))
 vrm::Hill_num(BCI)
 
 hill_eval <- microbenchmark(hill_sna(BCI),divHill(BCI),Hill_num(BCI),times = 500)
@@ -38,9 +40,10 @@ unicos_eval <- microbenchmark(unique(num_rep),unicos(num_rep), times = 500)
 
             ### Factorial
 
+KJLM::Factorial(10)
 vrm::fct(10)
 
-factorial_eval <- microbenchmark(factorial(10),fct_sna(10),fct(10), times = 500)
-    levels(factorial_eval$expr) <- c("R","Nicasio","Valeria")
+factorial_eval <- microbenchmark(factorial(10),fct_sna(10),Factorial(10),fct(10), times = 500)
+    levels(factorial_eval$expr) <- c("R","Nicasio","Kevin","Valeria")
     factorial_eval
     autoplot(factorial_eval)
