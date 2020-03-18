@@ -19,8 +19,8 @@ CRRL::Hill(BCI)
 KJLM::Diversidad_Hill(as.matrix(BCI))
 vrm::Hill_num(BCI)
 
-hill_eval <- microbenchmark(hill_sna(BCI),divHill(BCI),Hill(BCI),Diversidad_Hill(as.matrix(BCI)),Hill_num(BCI),times = 500)
-    levels(hill_eval$expr) <- c("Nicasio","Aurora","Claudio","Kevin","Valeria")
+hill_eval <- microbenchmark(hill_sna(BCI),divHill(BCI),Hill(BCI),Hill_num(BCI),times = 500)
+    levels(hill_eval$expr) <- c("Nicasio","Aurora","Claudio","Valeria")
     hill_eval
     autoplot(hill_eval)
 
