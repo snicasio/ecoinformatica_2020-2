@@ -10,16 +10,17 @@ source("primer_parcial.R")
 library(ARZ)
 library(vrm)
 library(KJLM)
+library(CRRL)
 
-
-        ##  Numeris de Hill
+        ##  Numeros de Hill
 
 ARZ::divHill(BCI)
+CRRL::Hill(BCI)
 KJLM::Diversidad_Hill(as.matrix(BCI))
 vrm::Hill_num(BCI)
 
-hill_eval <- microbenchmark(hill_sna(BCI),divHill(BCI),Hill_num(BCI),times = 500)
-    levels(hill_eval$expr) <- c("Nicasio","Aurora","Valeria")
+hill_eval <- microbenchmark(hill_sna(BCI),divHill(BCI),Hill(BCI),Diversidad_Hill(as.matrix(BCI)),Hill_num(BCI),times = 500)
+    levels(hill_eval$expr) <- c("Nicasio","Aurora","Claudio","Kevin","Valeria")
     hill_eval
     autoplot(hill_eval)
 
@@ -36,6 +37,16 @@ unicos_eval <- microbenchmark(unique(num_rep),unicos(num_rep), times = 500)
     levels(unicos_eval$expr) <- c("R","Aurora")
     unicos_eval
     autoplot(unicos_eval)
+
+
+            ### Suma acumulada
+
+CRRL::Sumac(1:100)
+
+acc_eval <- microbenchmark(cumsum(1:100),sum_acc_sna(1:100),Sumac(1:100), times = 500)
+    levels(acc_eval$expr) <- c("R","Nicasio","Claudio")
+    acc_eval
+    autoplot(acc_eval)
 
 
             ### Factorial
