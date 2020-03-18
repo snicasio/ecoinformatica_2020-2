@@ -5,10 +5,12 @@ library(microbenchmark)
 library(ggplot2)
 library(vegan)
 data("BCI")
+data("iris")
 
 source("primer_parcial.R")
 library(ARZ)
 library(vrm)
+library(LMR)
 library(KJLM)
 library(CRRL)
 
@@ -17,10 +19,11 @@ library(CRRL)
 ARZ::divHill(BCI)
 CRRL::Hill(BCI)
 KJLM::Diversidad_Hill(as.matrix(BCI))
+LMR::diversidad(BCI)
 vrm::Hill_num(BCI)
 
-hill_eval <- microbenchmark(hill_sna(BCI),divHill(BCI),Hill(BCI),Hill_num(BCI),times = 500)
-    levels(hill_eval$expr) <- c("Nicasio","Aurora","Claudio","Valeria")
+hill_eval <- microbenchmark(hill_sna(BCI),divHill(BCI),Hill(BCI),Hill_num(BCI),diversidad(BCI),times = 500)
+    levels(hill_eval$expr) <- c("Nicasio","Aurora","Claudio","Valeria","Leo")
     hill_eval
     autoplot(hill_eval)
 
@@ -58,3 +61,14 @@ factorial_eval <- microbenchmark(factorial(10),fct_sna(10),Factorial(10),fct(10)
     levels(factorial_eval$expr) <- c("R","Nicasio","Kevin","Valeria")
     factorial_eval
     autoplot(factorial_eval)
+
+
+            ### Sesgo y curtosis
+
+LMR::KS(iris$Sepal.Length)
+
+sk_eval <- microbenchmark(skr_sna(iris$Sepal.Length),KS(iris$Sepal.Length), times = 500)
+    levels(sk_eval$expr) <- c("Nicasio","Leo")
+    sk_eval
+    autoplot(sk_eval)
+    
