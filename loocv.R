@@ -4,7 +4,7 @@ cv <- function(x,dep,ind){
         val[i] <- predict(lm(paste0(dep, "~", ind) , data = x[-i,]), x)[i]
     }
     error <- mean((val-x[,dep])^2)
-    Rcv <- 1-(mean((x[,ind]-mean(x[,ind]))^2))
+    Rcv <- 1-(error/mean((x[,ind]-mean(x[,ind]))^2))
     R <- summary(lm(paste0(dep, "~", ind) , data = x))$adj.r.squared
     return(data.frame(error,R,Rcv))
 }
