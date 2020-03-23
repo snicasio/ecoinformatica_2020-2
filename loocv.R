@@ -1,7 +1,7 @@
 cv <- function(x,dep,ind){
     val <- rep(NA,nrow(x))
     for(i in 1:nrow(x)){
-        val[i] <- predict(lm(paste0(dep, "~", ind) , data = vir[-i,]), vir)[i]
+        val[i] <- predict(lm(paste0(dep, "~", ind) , data = x[-i,]), x)[i]
     }
     error <- mean((val-x[,dep])^2)
     Rcv <- 1-(mean((x[,ind]-mean(x[,ind]))^2))
