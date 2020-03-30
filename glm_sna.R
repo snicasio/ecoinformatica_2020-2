@@ -197,45 +197,9 @@ tab_mod$delta_BIC <- tab_mod$BIC-min(tab_mod$BIC)
 tab_mod[order(tab_mod$delta_BIC),c("delta_AIC","delta_AICc","delta_BIC")]
 
 
-any(mtcars$vs %in% 0:1)
+source("msl_sna.R")
 
-
-
-mdsel_sna <- function(dep,ind,parm,data,type){
-    
-    var_ind <- ind
-    combi <- c(list(1,2,3,4,5,6),combn(seq(ind),2, simplify = F),combn(seq(ind),3, simplify = F))
-    
-    mod_name <- list()
-    for(i in seq(combi)){
-        mod_name[[i]] <- paste0(dep,"~",paste(var_ind[combi[[i]]],collapse = "+"))
-        names(mod_name)[i] <- paste(var_ind[combi[[i]]],collapse = "+")
-    }
-    
-    modelos$nulo <- glm(dep ~ 1, data=data, family = binomial)
-    
-    if(is.double(dep) == T & type == "glm"){
-        md <- lapply(mod_name, function(x) glm(x,data=mtcars, family = gaussian))
-    }else{
-        if(is.integer(dep) == T & type == "glm"){
-            md <- glm(family = poisson)
-        }else{
-            if(any(dep %in% 0:1) == TRUE & type == "glm"){
-                md <- glm(family = binomial)
-            }
-        }
-    }else{
-        if(is.double(dep) == T & type == "lm"){
-            md <- lm()
-        }
-    }
-    LL <- unclass(logLik(md))[1]
-    AIC <- AIC(md)
-    AICc
-    
-    return(data.frame(Nombre,K,LL,AIC,AICc,BIC,delta_AIC,delta_AICc,delta_BIC,w_AIC,w_AICc))
-}
-
+msel_sna(dep = "vs", ind = names(mtcars)[c(1,3:7)],data = mtcars , type = "glm")
 
 
 
