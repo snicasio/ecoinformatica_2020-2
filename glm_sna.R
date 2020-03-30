@@ -198,8 +198,80 @@ tab_mod[order(tab_mod$delta_BIC),c("delta_AIC","delta_AICc","delta_BIC")]
 
 
 source("msl_sna.R")
+data("mtcars")
 
-msel_sna(dep = "vs", ind = names(mtcars)[c(1,3:7)],data = mtcars , type = "glm")
 
+msel_sna(dep = "vs", ind = names(mtcars)[c(1,3:7)],data = mtcars, type = "glm")
+
+tabla <- msel_sna(dep = "vs", ind = names(mtcars)[c(1,3:7)],data = mtcars, type = "glm")
+    tabla <- tabla[order(tabla$AICc),]
+    tabla[tabla$delta_AIC < 2,]
+
+
+        ##  Cambios en el AICc
+
+obs <- c(10:200)
+
+aicc_4 <- ((2*4)*(4+1))/(obs-4-1)
+
+tab_aicc <- data.frame(obs,aicc_4)
+
+plot(tab_aicc)
+
+
+    #   IMPORTANCIA DE LAS VARIABLES (INDEPENDIENTES)
+
+sum(tabla$w_aicc)
+cumsum(tabla$w_aicc)
+
+        ##  Modelos que tienen el 95% de probabilidad de contener una variable importante
+
+tabla$suma_acc <- cumsum(tabla$w_aicc)
+
+tabla_95 <- tabla[tabla$suma_acc < 0.95, ]
+
+
+grep("qsec", rownames(tabla_95))
+tabla_95[grep("qsec", rownames(tabla_95)),"w_aicc"]
+
+sum(tabla_95[grep("qsec", rownames(tabla_95)),"w_aicc"])
+
+
+grep("wt", rownames(tabla_95))
+tabla_95[grep("wt", rownames(tabla_95)),"w_aicc"]
+
+sum(tabla_95[grep("wt", rownames(tabla_95)),"w_aicc"])
+
+
+
+
+importancia <- sapply(names(mtcars)[c(1,3:7)], function(x)
+    sum(tabla_95[grep(x, rownames(tabla_95)),"w_aicc"]))
+
+barplot(importancia)
+
+summary(glm(vs~disp+wt+qsec, family = binomial, data=mtcars))
+summary(glm(vs~wt+qsec, family = binomial, data=mtcars))
+summary(glm(vs~disp+qsec, family = binomial, data=mtcars))
+
+
+    #   EFECTO RELATIVO DE LA VARIABLE
+
+tabla_95[,c("K","w_aicc")]
+
+glm(vs~wt+qsec, family = "binomial", mtcars)$coefficients[3]
+
+
+library(MuMIn)
+
+mod_global <- glm(vs~ mpg+disp+hp+drat+wt+qsec, data = mtcars, family = binomial, na.action = "na.fail")
+
+tab_todas <- dredge(global.model =  mod_global)
+
+mod_avg <- model.avg(tab_todas, subset = cumsum(weight) <= 0.95)
+
+    mod_avg$coefficients
+    confint(mod_avg)
+    summary(mod_avg)
 
 
