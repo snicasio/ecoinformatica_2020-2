@@ -25,7 +25,6 @@ msel_sna <- function(dep,ind,parm,data,type){
             }
         }
     }
-    Nombre <- names(mod_name)
     LL <- sapply(md,function(x) unclass(logLik(x))[1])
     AIC <- sapply(md,AIC)
     K <- sapply(md,function(x) length(x$coefficients)+1)
@@ -37,7 +36,7 @@ msel_sna <- function(dep,ind,parm,data,type){
     BIC <- K*log(nrow(data))-(2*LL)
     delta_BIC <- BIC-min(BIC)
     
-    return(data.frame(Nombre,K,LL,AIC,AICc,BIC,delta_AIC,delta_AICc,delta_BIC,w_aic,w_aicc))
+    return(data.frame(K,LL,AIC,AICc,BIC,delta_AIC,delta_AICc,delta_BIC,w_aic,w_aicc))
 }
 
 
