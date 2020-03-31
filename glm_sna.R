@@ -275,3 +275,27 @@ mod_avg <- model.avg(tab_todas, subset = cumsum(weight) <= 0.95)
     summary(mod_avg)
 
 
+    #   EJERCICIO: ELABOREN LA SELECCION DE MODELOS Y EL MODEL AVERAGE DE LAS VARIABLES QUE ESTEN ASOCIADAS A LA DIVERSIDAD DE PLANTAS DE LAGUNA LARGA
+
+library(vegan)
+library(moments)
+
+ll_ab <- read.csv("LL_abu.csv")
+ll_env <- read.csv("LL_env.csv")
+
+ll_div <- sapply(c("shannon","simpson","invsimpson"),
+                 function(x)
+                     diversity(ll_ab,index = x))
+
+base_ej <- cbind(ll_div,ll_env[,-1:-2])
+
+lapply(base_ej,shapiro.test)
+est_basic(base_ej)
+
+base_ej[ ,c("invsimpson","Phosphorous")] <- sqrt(base_ej[ ,c("invsimpson","Phosphorous")])
+base_ej[ ,c("pH","Calcium","Potassium","Magnesium","Sodium")] <- log(base_ej[ ,c("pH","Calcium","Potassium","Magnesium","Sodium")])
+
+globales <- lapply(names(base_ej)[1:3],
+                   function(x)
+                       glm(paste0(x,"~", paste(names(base_ej)[-1:-3], collapse = "+")),family = gaussian, na.action = "na.fail", data = base_ej))
+
