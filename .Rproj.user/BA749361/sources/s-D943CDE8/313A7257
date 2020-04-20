@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587416093922.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1473783179",
+    "id" : "313A7257",
+    "lastKnownWriteTime" : 1587424709,
+    "last_content_update" : 1587424709141,
+    "path" : "~/Clases/Ecologia Informatica_2020-2/ecoinformatica_2020-2/constrained_ordination.R",
+    "project_path" : "constrained_ordination.R",
+    "properties" : {
+        "cursorPosition" : "60,29",
+        "scrollLine" : "42",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
