@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587597319774.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "418830683",
+    "id" : "581860CB",
+    "lastKnownWriteTime" : 1587598637,
+    "last_content_update" : 1587598637306,
+    "path" : "~/ecoinformatica_2020-2/constrained_ordination_SZA.R",
+    "project_path" : "constrained_ordination_SZA.R",
+    "properties" : {
+        "cursorPosition" : "39,0",
+        "scrollLine" : "37"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
