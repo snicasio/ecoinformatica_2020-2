@@ -54,8 +54,9 @@ cum_abu <- sapply(abu_pca, function(x) summary(x)$importance[3,2])
 cum_abu
 
 
+env$H <- diversity(mic)
 
-abu_lista$Esp2
+
 
 CCA_abu <- cca(abu_lista$Esp2 ~ ., data = env)
 CCA_abu
@@ -66,10 +67,13 @@ ordistep(CCA_abu)
 
 cca(abu_lista$Esp2 ~ AWTD, data = env)
 
-RDA_abu <- rda(abu_trans$Esp2 ~ AWTD, data = env)
+RDA_abu <- rda(abu_trans$Esp2 ~ AWTD+Magnesium+Phosphorous+H, data = env)
     summary(RDA_abu)
+    anova(RDA_abu)
     RsquareAdj(RDA_abu)
-    varpart(abu_lista$Esp2, ~ AWTD, ~ Phosphorous, data = env, transfo = "hel")
+    varpart(abu_lista$Esp2, ~ AWTD, ~ Magnesium, ~ Phosphorous, ~ H, data = env, transfo = "hel")
+    
+    plot(RDA_abu)
 
 
 
