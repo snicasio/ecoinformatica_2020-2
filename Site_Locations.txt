@@ -1,0 +1,10 @@
+Site,Latitude,Longitude
+Zuma_Ridge(ZR),34.033841,-118.816397
+Santa_Monica_Mountains(SMM),34.035984,-118.804160
+Cheeseboro_Canyon(CHE),34.149857,-118.733984
+Descanso_Gardens(DES),34.198916,-118.213941
+Eaton_Canyon(EAT),34.182018,-118.096039
+Voorhis_Ecological_Reserve(VOR),34.057696,-117.832266
+Bernard_Field_Station(BFS),34.109047,-117.710374
+Crafton_Hills_Conservancy(CH),34.037760,-117.121647
+Crafton_Hills_College(CHC),34.045716,-117.094574
