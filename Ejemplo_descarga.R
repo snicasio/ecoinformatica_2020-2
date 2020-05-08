@@ -3,7 +3,7 @@
 library(dataone)
 
 cn <- CNode("PROD")
-mn <- getMNode(cn, "urn:node:KNB")
+mn <- getMNode(cn, "urn:node:LTER")
 
 mySearchTerms <- list(q="keywords:Plant+OR+plant",
                       fq="attribute:biomass+OR+Biomass+OR+npp+OR+NPP",
@@ -13,6 +13,40 @@ mySearchTerms <- list(q="keywords:Plant+OR+plant",
                       sort="dateUploaded+desc")
 
 result <- query(mn, solrQuery = mySearchTerms, as="data.frame")
+
+result[1,]
+
+
+
+    #   Ejemplo con datos descargables
+
+cn <- CNode("PROD")
+mn <- getMNode(cn, "urn:node:KNB")
+mySearchTerms <- list(q="abstract:salmon+AND+keywords:acoustics+AND+keywords:\"Oncorhynchus nerka\"",
+                      fl="id,title,dateUploaded,abstract,size",
+                      fq="dateUploaded:[2013-01-01T00:00:00.000Z TO 2014-01-01T00:00:00.000Z]",
+                      sort="dateUploaded+desc")
+result <- query(mn, solrQuery=mySearchTerms, as="data.frame")
+result[1,c("id", "title")]
+pid <- result[1,'id']   #   El DOI es fundamental para acceder a los datos
+
+
+        ##   Metadatos
+
+library(XML)
+metadata <- rawToChar(getObject(mn, pid))
+
+
+        ##   Descarga de archivo
+
+dataRaw <- getObject(mn, "df35d.443.1") # Lo que viene entre comillas es el DOI. En este ejemplo cambio el DOI
+dataChar <- rawToChar(dataRaw)
+theData <- textConnection(dataChar)
+df <- read.csv(theData, stringsAsFactors=FALSE)
+df[1,]
+
+
+
 
 
 
