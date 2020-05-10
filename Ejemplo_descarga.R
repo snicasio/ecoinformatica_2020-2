@@ -1,5 +1,6 @@
-
-
+install.packages("XML")
+library(XML)
+install.packages("dataone")
 library(dataone)
 
 cn <- CNode("PROD")
@@ -14,7 +15,7 @@ mySearchTerms <- list(q="keywords:Plant+OR+plant",
 
 result <- query(mn, solrQuery = mySearchTerms, as="data.frame")
 
-result[1,]
+result[1,c("id","title")]
 
 
 
@@ -30,7 +31,7 @@ result <- query(mn, solrQuery=mySearchTerms, as="data.frame")
 result[1,c("id", "title")]
 pid <- result[1,'id']   #   El DOI es fundamental para acceder a los datos
 
-
+pid
         ##   Metadatos
 
 library(XML)
