@@ -2,21 +2,6 @@
 
 library(dataone)
 
-cn <- CNode("PROD")
-mn <- getMNode(cn, "urn:node:LTER")
-
-mySearchTerms <- list(q="keywords:Plant+OR+plant",
-                      fq="attribute:biomass+OR+Biomass+OR+npp+OR+NPP",
-                      fq="formatType:METADATA",
-                      fq="id:doi*",
-                      fl="id,title,dateUploaded,abstract,size",
-                      sort="dateUploaded+desc")
-
-result <- query(mn, solrQuery = mySearchTerms, as="data.frame")
-
-result[1,]
-
-
 
     #   Ejemplo con datos descargables
 
