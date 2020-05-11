@@ -1,6 +1,10 @@
-
-
+install.packages("XML")
+library(XML)
+install.packages("dataone")
 library(dataone)
+
+cn <- CNode("PROD")
+mn <- getMNode(cn, "urn:node:LTER")
 
 
     #   Ejemplo con datos descargables
@@ -15,7 +19,7 @@ result <- query(mn, solrQuery=mySearchTerms, as="data.frame")
 result[1,c("id", "title")]
 pid <- result[1,'id']   #   El DOI es fundamental para acceder a los datos
 
-
+pid
         ##   Metadatos
 
 library(XML)
