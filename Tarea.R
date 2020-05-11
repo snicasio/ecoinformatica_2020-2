@@ -46,6 +46,19 @@ Mam.clim <- cbind(Mam, Tabla.clima)
             ### Nota: Esto tambien lo haran para mamiferos voladores y roedores (cada uno por separado)
             ### Quiero ver sus tablas AICc y el model average de las variables con mayor importancia
 
+names(Mam.clim)
+
+Mam.clim <- Mam.clim[ ,c(7,44,47,56:74)]
+    names(Mam.clim)[1:3] <- c("Size", "Lat", "Lon")
+
+
+mod.ej <- glm(Size ~ ., data=Mam.clim, family = "gaussian", na.action = "na.fail")
+    mod.ej
+
+library(MuMIn)
+
+ej <- dredge(mod.ej, beta = "sd", m.lim = c(0,4))
+    ej[1:5,]
 
 
         ##  MAPA
@@ -68,10 +81,14 @@ Mam.clim <- cbind(Mam, Tabla.clima)
     
             ### Objeto "stack" para elaborar el mapa de disribucion de tamanos
 
-Raster.var <- stack(Lat, Lon, Clim$bio15)   #   Nota: las capas que coloques en el stack puede cambiar entre modelos
+Raster.var <- stack(Lat, Lon, Clim$bio8, Clim$bio19)   #   Nota: las capas que coloques en el stack puede cambiar entre modelos
 
 
             ### Elaboracion del mapa
+
+x <- glm(Size ~ Lat+Lon+bio8+bio19, data = Mam.clim, family = "gaussian")
+summary(x)
+
 
 Mam.mass <- predict(Raster.var, x) #    La "x" representara su mejor modelo
 
