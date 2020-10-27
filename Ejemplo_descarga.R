@@ -4,19 +4,19 @@ install.packages("dataone")
 library(dataone)
 
 cn <- CNode("PROD")
-mn <- getMNode(cn, "urn:node:LTER")
+mn <- getMNode(cn, "urn:node:KNB")
 
 
     #   Ejemplo con datos descargables
 
 cn <- CNode("PROD")
 mn <- getMNode(cn, "urn:node:KNB")
-mySearchTerms <- list(q="abstract:salmon+AND+keywords:acoustics+AND+keywords:\"Oncorhynchus nerka\"",
+mySearchTerms <- list(q="abstract:biomass+AND+forest",
                       fl="id,title,dateUploaded,abstract,size",
-                      fq="dateUploaded:[2013-01-01T00:00:00.000Z TO 2014-01-01T00:00:00.000Z]",
+                      fq="dateUploaded:[1900-01-01T00:00:00.000Z TO 2020-01-01T00:00:00.000Z]",
                       sort="dateUploaded+desc")
 result <- query(mn, solrQuery=mySearchTerms, as="data.frame")
-result[1,c("id", "title")]
+result[,c("id", "title")]
 pid <- result[1,'id']   #   El DOI es fundamental para acceder a los datos
 
 pid
@@ -24,14 +24,14 @@ pid
 
 library(XML)
 metadata <- rawToChar(getObject(mn, pid))
-
+    metadata
 
         ##   Descarga de archivo
 
-dataRaw <- getObject(mn, "df35d.443.1") # Lo que viene entre comillas es el DOI. En este ejemplo cambio el DOI
+dataRaw <- getObject(mn, pid) # Lo que viene entre comillas es el DOI. En este ejemplo cambio el DOI
 dataChar <- rawToChar(dataRaw)
 theData <- textConnection(dataChar)
-df <- read.csv(theData, stringsAsFactors=FALSE)
+df <- read.csv(theData, stringsAsFactors=FALSE, col.names = FALSE)
 df[1,]
 
 
